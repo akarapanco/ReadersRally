@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "640295899608",
+    "project_id": "readersrally-6f8b0",
+    "storage_bucket": "readersrally-6f8b0.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:640295899608:android:0881318de6b7f6afdd22ad",
+        "android_client_info": {
+          "package_name": "com.scaledscholars.readersrally"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDAFMa2P-2Uo6-TOIjR7t_r-SCWFk9T5O8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
