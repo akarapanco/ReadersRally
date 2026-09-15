@@ -32,12 +32,18 @@ android {
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
     }
+    buildFeatures {
+        viewBinding = true
+    }
 }
 
 dependencies {
     implementation(libs.activity.ktx)
+    implementation(libs.annotation)
     implementation(libs.appcompat)
     implementation(libs.constraintlayout)
+    implementation(libs.lifecycle.livedata.ktx)
+    implementation(libs.lifecycle.viewmodel.ktx)
     implementation(libs.material)
 
     implementation(platform("com.google.firebase:firebase-bom:34.18.0"))

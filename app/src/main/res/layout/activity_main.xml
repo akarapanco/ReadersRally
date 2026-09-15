@@ -8,12 +8,50 @@
     tools:context=".MainActivity">
 
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!"
+        android:id="@+id/textView"
+        android:layout_width="402sp"
+        android:layout_height="45sp"
+        android:layout_marginTop="32sp"
+        android:fontFamily="casual"
+        android:text="@string/welcome_message"
+        android:textAlignment="center"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:textSize="28sp"
+        android:typeface="normal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <Button
+        android:id="@+id/signUpButton"
+        android:layout_width="179dp"
+        android:layout_height="67dp"
+        android:layout_marginStart="116dp"
+        android:layout_marginTop="90dp"
+        android:layout_marginEnd="116dp"
+        android:layout_marginBottom="29dp"
+        android:onClick="goToLogin"
+        android:text="@string/sign_up"
+        app:layout_constraintBottom_toTopOf="@+id/logInButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+    <Button
+        android:id="@+id/logInButton"
+        android:layout_width="179dp"
+        android:layout_height="65dp"
+        android:layout_marginStart="116dp"
+        android:layout_marginTop="29dp"
+        android:layout_marginEnd="116dp"
+        android:layout_marginBottom="428dp"
+        android:onClick="goToLogin"
+        android:text="@string/log_in"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/signUpButton" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
