@@ -23,9 +23,10 @@ public class MainActivity extends AppCompatActivity {
             return insets;
         });
 
+        /* MYGROUPS - activity for button - move me to new file!
         Button myGroupsButton = findViewById(R.id.myGroupsButton);
         myGroupsButton.setOnClickListener(v -> {
             startActivity(new Intent(this, MyGroupsActivity.class));
-        });
+        });*/
     }
 }
