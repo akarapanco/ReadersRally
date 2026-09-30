@@ -19,4 +19,19 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />-->
 
+    <TextView
+        android:id="@+id/appTitle"
+        android:layout_width="84dp"
+        android:layout_height="22dp"
+        android:text="@string/app_name"
+        tools:layout_editor_absoluteX="163dp"
+        tools:layout_editor_absoluteY="42dp" />
+
+    <Button
+        android:id="@+id/loginButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Button"
+        tools:layout_editor_absoluteX="166dp"
+        tools:layout_editor_absoluteY="243dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>
