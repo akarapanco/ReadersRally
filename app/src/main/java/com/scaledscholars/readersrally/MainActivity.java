@@ -28,5 +28,11 @@ public class MainActivity extends AppCompatActivity {
         myGroupsButton.setOnClickListener(v -> {
             startActivity(new Intent(this, MyGroupsActivity.class));
         });*/
+
+        // Log In Button - 30 SEPT - NAVIGATES STRAIGHT TO GROUPS PAGE (for test)
+        Button loginButton = findViewById(R.id.loginButton);
+        loginButton.setOnClickListener(v -> {
+                startActivity(new Intent(this, MyGroupsActivity.class));
+        });
     }
 }
