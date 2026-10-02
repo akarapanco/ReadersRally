@@ -29,6 +29,9 @@
         <activity
             android:name=".BookmarkedGroupsActivity"
             android:exported="false" />
+        <activity
+            android:name=".JoinRequestsActivity"
+            android:exported="false" />
     </application>
 
 </manifest>
