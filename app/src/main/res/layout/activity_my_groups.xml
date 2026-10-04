@@ -18,6 +18,13 @@
         android:id="@+id/bookmarkedGroupsButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
         android:text="Bookmarked Groups" />
+
+    <Button
+        android:id="@+id/joinRequestsButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Join Requests" />
 
 </LinearLayout>
