@@ -1,3 +1,12 @@
 <resources>
     <string name="app_name">ReadersRally</string>
+    <string name="log_in">Log In</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="testScroll">Note: Do we even need a scroll view? Depends on how many groups we plan to preview, I guess.
+        This is a very long string to test the scroll view, even though Im not sure how it will work if we want to actually put enrolled groups views in there.
+        For now this will serve as a placeholder to show the scrolling functionality, and we will work on the groups view
+        once we can successfully navigate around the app and see/join/manage groups. This is more of a quality of life
+        feature than a real feature, so it should not take excessive priority over the actual functionality of the
+        application.</string>
+    <string name="more">More…</string>
 </resources>
