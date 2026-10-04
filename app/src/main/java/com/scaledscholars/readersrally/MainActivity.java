@@ -10,10 +10,6 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-/* MAIN ACTIVITY = STARTUP PAGE
-    Displays app title text and "Log in" and "Sign up" buttons
- */
-
 public class MainActivity extends AppCompatActivity {
 
     @Override
@@ -27,16 +23,9 @@ public class MainActivity extends AppCompatActivity {
             return insets;
         });
 
-        /* MYGROUPS - activity for button - move me to new file!
         Button myGroupsButton = findViewById(R.id.myGroupsButton);
         myGroupsButton.setOnClickListener(v -> {
             startActivity(new Intent(this, MyGroupsActivity.class));
-        });*/
-
-        // Log In Button - 30 SEPT - NAVIGATES STRAIGHT TO HOME PAGE
-        Button loginButton = findViewById(R.id.loginButton);
-        loginButton.setOnClickListener(v -> {
-                startActivity(new Intent(this, HomePage.class));
         });
     }
 }
