@@ -9,4 +9,6 @@
         feature than a real feature, so it should not take excessive priority over the actual functionality of the
         application.</string>
     <string name="more">More…</string>
+    <string name="my_groups_header">ReadersRally - My Groups</string>
+    <string name="discussions_header">ReadersRally - Discussions</string>
 </resources>

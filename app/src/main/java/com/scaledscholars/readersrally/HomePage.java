@@ -28,5 +28,10 @@ public class HomePage extends AppCompatActivity {
         myGroupsButton.setOnClickListener(v -> {
             startActivity(new Intent(this, MyGroupsActivity.class));
         });
+
+        Button discussionsButton = findViewById(R.id.discussionsButton);
+        discussionsButton.setOnClickListener(v -> {
+            startActivity(new Intent(this, DiscussionsActivity.class));
+        });
     }
 }
