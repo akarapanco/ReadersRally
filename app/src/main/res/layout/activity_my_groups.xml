@@ -6,6 +6,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center_vertical">
+    <TextView
+        android:id="@+id/myGroupsHeader"
+        style="@style/HeaderTextStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/my_groups_header" />
 
     <Button
         android:id="@+id/enrolledGroupsButton"
@@ -22,7 +28,7 @@
     <Button
         android:id="@+id/bookmarkedGroupsButton"
         android:layout_width="200dp"
-        android:layout_height="wrap_content"
+        android:layout_height="48dp"
         android:layout_marginStart="106dp"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="106dp"
@@ -36,25 +42,13 @@
     <Button
         android:id="@+id/joinRequestsButton"
         android:layout_width="200dp"
-        android:layout_height="wrap_content"
+        android:layout_height="48dp"
         android:layout_marginStart="106dp"
         android:layout_marginTop="438dp"
         android:layout_marginEnd="105dp"
         android:layout_marginBottom="255dp"
         android:text="Join Requests"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/myGroupsHeader"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="125dp"
-        android:layout_marginTop="42dp"
-        android:layout_marginEnd="126dp"
-        android:text="@string/my_groups_header"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
