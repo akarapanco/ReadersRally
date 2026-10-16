@@ -15,14 +15,25 @@ public class GroupAdapter extends RecyclerView.Adapter<GroupAdapter.GroupViewHol
         void onLeaveClicked(Group group);
     }
 
+    public interface OnGroupClickListener {
+        void onGroupClicked(Group group);
+    }
+
     private List<Group> groupList;
     private OnLeaveClickListener listener;
     private String buttonLabel;
+    private OnGroupClickListener forumClickListener;
 
     public GroupAdapter(List<Group> groupList, OnLeaveClickListener listener, String buttonLabel) {
+        this(groupList, listener, buttonLabel, null);
+    }
+
+    public GroupAdapter(List<Group> groupList, OnLeaveClickListener listener, String buttonLabel,
+                         OnGroupClickListener forumClickListener) {
         this.groupList = groupList;
         this.listener = listener;
         this.buttonLabel = buttonLabel;
+        this.forumClickListener = forumClickListener;
     }
 
     @NonNull
@@ -40,6 +51,13 @@ public class GroupAdapter extends RecyclerView.Adapter<GroupAdapter.GroupViewHol
         holder.bookText.setText(group.bookTitle);
         holder.leaveButton.setText(buttonLabel);
         holder.leaveButton.setOnClickListener(v -> listener.onLeaveClicked(group));
+
+        if (forumClickListener != null) {
+            holder.forumButton.setVisibility(View.VISIBLE);
+            holder.forumButton.setOnClickListener(v -> forumClickListener.onGroupClicked(group));
+        } else {
+            holder.forumButton.setVisibility(View.GONE);
+        }
     }
 
     @Override
@@ -49,13 +67,14 @@ public class GroupAdapter extends RecyclerView.Adapter<GroupAdapter.GroupViewHol
 
     static class GroupViewHolder extends RecyclerView.ViewHolder {
         TextView nameText, bookText;
-        Button leaveButton;
+        Button leaveButton, forumButton;
 
         GroupViewHolder(View itemView) {
             super(itemView);
             nameText = itemView.findViewById(R.id.groupNameText);
             bookText = itemView.findViewById(R.id.groupBookText);
             leaveButton = itemView.findViewById(R.id.leaveButton);
+            forumButton = itemView.findViewById(R.id.forumButton);
         }
     }
 }
