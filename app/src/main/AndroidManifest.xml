@@ -36,10 +36,6 @@
         <activity
             android:name=".JoinRequestsActivity"
             android:exported="false" />
-        <activity
-            android:name=".DiscussionsActivity"
-            android:exported="false"
-            android:windowSoftInputMode="adjustResize" />
     </application>
 
 </manifest>
