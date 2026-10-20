@@ -28,5 +28,6 @@ public class HomePage extends AppCompatActivity {
         myGroupsButton.setOnClickListener(v -> {
             startActivity(new Intent(this, MyGroupsActivity.class));
         });
+
     }
 }
