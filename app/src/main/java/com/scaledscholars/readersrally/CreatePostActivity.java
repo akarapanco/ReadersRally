@@ -18,7 +18,9 @@ public class CreatePostActivity extends AppCompatActivity {
 
     private FirebaseFirestore db;
     private String groupId;
+    private EditText titleEditText;
     private EditText bookEditText;
+    private EditText nameEditText;
     private EditText contentEditText;
     private Switch repliesSwitch;
 
@@ -26,42 +28,45 @@ public class CreatePostActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_post);
+        findViewById(R.id.backButton).setOnClickListener(v -> finish());
         db = FirebaseFirestore.getInstance();
         groupId = getIntent().getStringExtra(EXTRA_GROUP_ID);
 
+        titleEditText = findViewById(R.id.titleEditText);
         bookEditText = findViewById(R.id.bookEditText);
+        nameEditText = findViewById(R.id.nameEditText);
         contentEditText = findViewById(R.id.contentEditText);
         repliesSwitch = findViewById(R.id.repliesSwitch);
+        contentEditText.setFilters(new InputFilter[]{new InputFilter.LengthFilter(CHARACTER_LIMIT)});
+
         Button postButton = findViewById(R.id.postButton);
-
-        contentEditText.setFilters(new InputFilter[]{ new InputFilter.LengthFilter(CHARACTER_LIMIT) });
-
         postButton.setOnClickListener(v -> createPost());
     }
 
     private void createPost() {
+        String title = titleEditText.getText().toString().trim();
         String book = bookEditText.getText().toString().trim();
+        String name = nameEditText.getText().toString().trim();
         String content = contentEditText.getText().toString().trim();
 
-        if (book.isEmpty() || content.isEmpty()) {
-            Toast.makeText(this, "Please fill out the book and post content", Toast.LENGTH_SHORT).show();
+        if (title.isEmpty() || book.isEmpty() || name.isEmpty() || content.isEmpty()) {
+            Toast.makeText(this, "Please fill in every field", Toast.LENGTH_SHORT).show();
             return;
         }
 
-        String userId = CURRENT_USER_ID;
-        boolean repliesEnabled = repliesSwitch.isChecked();
-
         Map<String, Object> postData = new HashMap<>();
         postData.put("groupId", groupId);
-        postData.put("authorId", userId);
+        postData.put("authorId", CURRENT_USER_ID);
+        postData.put("authorName", name);
+        postData.put("title", title);
         postData.put("book", book);
         postData.put("content", content);
-        postData.put("repliesEnabled", repliesEnabled);
+        postData.put("repliesEnabled", repliesSwitch.isChecked());
         postData.put("createdAt", System.currentTimeMillis());
 
         db.collection("posts")
             .add(postData)
-            .addOnSuccessListener(docRef -> {
+            .addOnSuccessListener(ref -> {
                 Toast.makeText(this, "Post created", Toast.LENGTH_SHORT).show();
                 finish();
             })

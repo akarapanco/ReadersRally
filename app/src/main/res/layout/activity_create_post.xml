@@ -3,41 +3,84 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="16dp"
-    android:background="#FFFFFF"
-    android:fitsSystemWindows="true">
+    android:fitsSystemWindows="true"
+    android:gravity="center_horizontal"
+    android:padding="16dp">
 
-    <EditText
-        android:id="@+id/bookEditText"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Book title"
-        android:textColor="#000000"
-        android:textColorHint="#888888" />
-
-    <EditText
-        android:id="@+id/contentEditText"
-        android:layout_width="match_parent"
-        android:layout_height="120dp"
-        android:gravity="top"
-        android:hint="What do you want to discuss?"
-        android:textColor="#000000"
-        android:textColorHint="#888888"
-        android:layout_marginTop="12dp" />
-
-    <Switch
-        android:id="@+id/repliesSwitch"
+    <Button
+        android:id="@+id/backButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Allow replies"
-        android:textColor="#000000"
-        android:checked="true"
-        android:layout_marginTop="12dp" />
+        android:layout_gravity="start"
+        android:text="Back" />
+
+    <TextView
+        style="@style/HeaderTextStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Discussion Board" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:orientation="vertical"
+        android:background="@drawable/card_background"
+        android:padding="16dp">
+
+        <EditText
+            android:id="@+id/titleEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Post title"
+            android:textColor="#000000"
+            android:textColorHint="#888888" />
+
+        <EditText
+            android:id="@+id/bookEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:hint="What book are you reading?"
+            android:textColor="#000000"
+            android:textColorHint="#888888" />
+
+        <EditText
+            android:id="@+id/nameEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:hint="Your name"
+            android:textColor="#000000"
+            android:textColorHint="#888888" />
+
+        <EditText
+            android:id="@+id/contentEditText"
+            android:layout_width="match_parent"
+            android:layout_height="140dp"
+            android:layout_marginTop="8dp"
+            android:gravity="top"
+            android:hint="What do you want to discuss?"
+            android:inputType="textMultiLine"
+            android:textColor="#000000"
+            android:textColorHint="#888888" />
+
+        <Switch
+            android:id="@+id/repliesSwitch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:checked="true"
+            android:text="Allow replies  "
+            android:textColor="#000000" />
+    </LinearLayout>
 
     <Button
         android:id="@+id/postButton"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Post"
-        android:layout_marginTop="16dp" />
+        android:layout_marginTop="16dp"
+        android:minWidth="200dp"
+        android:text="Post" />
 </LinearLayout>
