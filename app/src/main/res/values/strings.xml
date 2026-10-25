@@ -12,4 +12,6 @@
     <string name="homepage_header">ReadersRally - Home</string>
     <string name="my_groups_header">ReadersRally - My Groups</string>
     <string name="discussions_header">ReadersRally - Discussions</string>
+    <string name="back">Back</string>
+    <string name="repliesOff">Replies are turned off for this post.</string>
 </resources>
