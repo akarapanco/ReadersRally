@@ -14,8 +14,9 @@
     <style name="Widget.AppCompat.Button" parent="Widget.Material3.Button">
         <item name="backgroundTint">@color/dark_violet</item>
         <item name="android:textColor">@color/dark_beige</item>
-        <item name="android:textStyle">bold</item>
         <item name="android:gravity">center</item>
+        <item name="android:includeFontPadding">false</item>
+        <item name="android:textSize">20sp</item>
     </style>
 
     <style name="HeaderTextStyle" parent="Widget.Material3.CheckedTextView">
