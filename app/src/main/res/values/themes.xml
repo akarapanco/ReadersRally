@@ -21,7 +21,6 @@
 
     <style name="HeaderTextStyle" parent="Widget.Material3.CheckedTextView">
         <item name="android:textSize"> 25sp </item>
-        <item name="android:textStyle">bold</item>
         <item name="android:textColor">@color/beige</item>
         <item name="android:gravity">center</item>
         <item name="android:padding">16dp</item>
