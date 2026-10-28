@@ -1,5 +1,6 @@
 package com.scaledscholars.readersrally;
 
+import android.content.Intent;
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -27,7 +28,7 @@ public class EnrolledGroupsActivity extends AppCompatActivity {
         RecyclerView recyclerView = findViewById(R.id.enrolledGroupsRecyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        adapter = new GroupAdapter(enrolledGroups, this::leaveGroup, "Leave Group");
+        adapter = new GroupAdapter(enrolledGroups, this::leaveGroup, "Leave Group", this::openDiscussionForum);
         recyclerView.setAdapter(adapter);
 
         loadEnrolledGroups();
@@ -63,5 +64,11 @@ public class EnrolledGroupsActivity extends AppCompatActivity {
                 enrolledGroups.remove(group);
                 adapter.notifyDataSetChanged();
             });
+    }
+
+    private void openDiscussionForum(Group group) {
+        Intent intent = new Intent(this, DiscussionForumActivity.class);
+        intent.putExtra(DiscussionForumActivity.EXTRA_GROUP_ID, group.id);
+        startActivity(intent);
     }
 }
