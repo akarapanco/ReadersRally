@@ -36,8 +36,8 @@ public class GroupAdapter extends RecyclerView.Adapter<GroupAdapter.GroupViewHol
     @Override
     public void onBindViewHolder(@NonNull GroupViewHolder holder, int position) {
         Group group = groupList.get(position);
-        holder.nameText.setText(group.name);
-        holder.bookText.setText(group.bookTitle);
+        holder.nameText.setText(group.getName());
+        holder.bookText.setText(group.getBookTitle());
         holder.leaveButton.setText(buttonLabel);
         holder.leaveButton.setOnClickListener(v -> listener.onLeaveClicked(group));
     }

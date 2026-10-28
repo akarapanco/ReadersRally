@@ -58,7 +58,7 @@ public class EnrolledGroupsActivity extends AppCompatActivity {
 
     private void leaveGroup(Group group) {
         db.collection("users").document(CURRENT_USER_ID)
-            .update("enrolledGroupIds", FieldValue.arrayRemove(group.id))
+            .update("enrolledGroupIds", FieldValue.arrayRemove(group.getId()))
             .addOnSuccessListener(unused -> {
                 enrolledGroups.remove(group);
                 adapter.notifyDataSetChanged();

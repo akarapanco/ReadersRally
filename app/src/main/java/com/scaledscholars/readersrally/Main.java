@@ -9,6 +9,7 @@ public class Main
     public static void main(String[] args) 
     {
         //How the book clubs will display as search results:
+        //GroupID
         //Name
         //Genre
         //Book Length
@@ -20,7 +21,8 @@ public class Main
 
         //Fantasy Group - online cadence, large book, medium group
         clubs.add(new Group(
-                "001","Fantasy Group",
+                "001",
+                "Fantasy Group",
                 "Fantasy",
                 "Fantasy Book",
                 450,
@@ -73,20 +75,16 @@ public class Main
                             ));
 
         System.out.println("TESTING FILTER OPTION:");
-
-        
         System.out.println("Creating a test filter configuration...");
         
         //----------------------------
         //Filter config entered by a user - test
         GroupFilter filter = new GroupFilter( "Fantasy", 200,500, "Online", 5, 20);
-
         System.out.println("Fetching search results...");
         
         //----------------------------
         //Accumulate the list of results
         List<Group> results = Filter.filterGroups(clubs, filter);
-
   
         //Populate the Results
         System.out.println("Search Results:");

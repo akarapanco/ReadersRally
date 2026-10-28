@@ -9,4 +9,14 @@
         feature than a real feature, so it should not take excessive priority over the actual functionality of the
         application.</string>
     <string name="more">More…</string>
+
+    <!-- Browse Groups -->
+    <string name="group_unnamed">Unnamed Group</string>
+    <string name="group_not_specified">Not specified</string>
+    <string name="group_book">Currently Reading: %1$s</string>
+    <string name="group_genre">Genre: %1$s</string>
+    <string name="group_members">Members: %1$d</string>
+    <string name="group_members_unknown">Members: Not specified</string>
+    <string name="group_selected">Selected: %1$s</string>
+
 </resources>

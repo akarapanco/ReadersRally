@@ -12,6 +12,7 @@ public class Group
 
     public Group() {}
 
+    //Constructor to create a group
     public Group(String id, String name, String bookTitle)
     {
         this.id = id;

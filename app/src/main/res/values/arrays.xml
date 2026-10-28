@@ -1,0 +1,34 @@
+
+<resources>
+
+    <string-array name="genre_options">
+        <item>Any</item>
+        <item>Fantasy</item>
+        <item>Sci-Fi</item>
+        <item>Mystery</item>
+        <item>Romance</item>
+        <item>Nonfiction</item>
+        <item>Horror</item>
+        <item>Young Adult</item>
+        <item>Fiction</item>
+        <item>History</item>
+        <item>Religion</item>
+    </string-array>
+
+    <string-array name="communication_options">
+        <item>Any</item>
+        <item>Online</item>
+        <item>In-Person</item>
+    </string-array>
+
+    <array name="default_book_range">
+        <item>0</item>
+        <item>1000</item>
+    </array>
+
+    <array name="default_group_range">
+        <item>1</item>
+        <item>50</item>
+    </array>
+
+</resources>

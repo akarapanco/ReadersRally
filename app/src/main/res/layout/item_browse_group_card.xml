@@ -1,0 +1,50 @@
+
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="8dp"
+    android:background="@android:drawable/dialog_holo_light_frame"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <TextView
+        android:id="@+id/groupNameText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Fantasy Book Club"
+        android:textSize="18sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/groupBookText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="Currently Reading: The Hobbit"
+        android:textSize="14sp" />
+
+    <TextView
+        android:id="@+id/groupGenreText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:text="Genre: Fantasy"
+        android:textSize="14sp" />
+
+    <TextView
+        android:id="@+id/groupSizeText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:text="Members: 8"
+        android:textSize="14sp" />
+
+    <Button
+        android:id="@+id/viewGroupButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:text="View Group" />
+
+</LinearLayout>

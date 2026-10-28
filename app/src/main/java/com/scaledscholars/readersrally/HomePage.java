@@ -28,5 +28,13 @@ public class HomePage extends AppCompatActivity {
         myGroupsButton.setOnClickListener(v -> {
             startActivity(new Intent(this, MyGroupsActivity.class));
         });
+
+        // BROWSEGROUPS - activity for button
+        Button browseGroupsButton = findViewById(R.id.browseGroupsButton);
+
+        browseGroupsButton.setOnClickListener(v -> {
+            Intent intent = new Intent(this, BrowseGroupsActivity.class);
+            startActivity(intent);
+        });
     }
 }

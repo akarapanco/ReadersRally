@@ -29,13 +29,20 @@
         <activity
             android:name=".BookmarkedGroupsActivity"
             android:exported="false" />
-      
         <activity
             android:name=".HomePage"
             android:exported="false"
             android:windowSoftInputMode="adjustResize" />
-      <activity
+        <activity
             android:name=".JoinRequestsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".BrowseGroupsActivity"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
+
+        <activity
+            android:name=".GroupDetailsActivity"
             android:exported="false" />
     </application>
 
