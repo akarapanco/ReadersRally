@@ -10,6 +10,8 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
+
 /* MAIN ACTIVITY = STARTUP PAGE
     Displays app title text and "Log in" and "Sign up" buttons
  */
