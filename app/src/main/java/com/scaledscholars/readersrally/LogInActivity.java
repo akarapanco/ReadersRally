@@ -11,12 +11,14 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 public class LogInActivity extends AppCompatActivity {
 
-    private TextInputEditText emailInput, passwordInput;
+    private TextInputEditText identifierInput, passwordInput;
     private Button logInButton;
     private FirebaseAuth auth;
+    private FirebaseFirestore db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,8 +26,9 @@ public class LogInActivity extends AppCompatActivity {
         setContentView(R.layout.activity_log_in);
 
         auth = FirebaseAuth.getInstance();
+        db = FirebaseFirestore.getInstance();
 
-        emailInput = findViewById(R.id.emailInput);
+        identifierInput = findViewById(R.id.identifierInput);
         passwordInput = findViewById(R.id.passwordInput);
         logInButton = findViewById(R.id.logInButton);
         TextView goToSignUp = findViewById(R.id.goToSignUp);
@@ -45,11 +48,11 @@ public class LogInActivity extends AppCompatActivity {
     }
 
     private void attemptLogIn() {
-        String email = text(emailInput);
+        String identifier = text(identifierInput);
         String password = text(passwordInput);
 
-        if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-            emailInput.setError("Enter a valid email");
+        if (identifier.isEmpty()) {
+            identifierInput.setError("Enter your email or username");
             return;
         }
         if (password.isEmpty()) {
@@ -58,13 +61,35 @@ public class LogInActivity extends AppCompatActivity {
         }
 
         logInButton.setEnabled(false);
+
+        if (Patterns.EMAIL_ADDRESS.matcher(identifier).matches()) {
+            // It's an email, so sign in directly
+            signIn(identifier, password);
+        } else {
+            // Treat it as a username: look up the email saved at sign up
+            db.collection("usernames").document(identifier.toLowerCase()).get()
+                    .addOnSuccessListener(doc -> {
+                        String email = doc.getString("email");
+                        if (email == null) {
+                            showFailure();
+                        } else {
+                            signIn(email, password);
+                        }
+                    })
+                    .addOnFailureListener(e -> showFailure());
+        }
+    }
+
+    private void signIn(String email, String password) {
         auth.signInWithEmailAndPassword(email, password)
                 .addOnSuccessListener(result -> goToMain())
-                .addOnFailureListener(e -> {
-                    logInButton.setEnabled(true);
-                    Toast.makeText(this, "Log in failed: check your email and password",
-                            Toast.LENGTH_LONG).show();
-                });
+                .addOnFailureListener(e -> showFailure());
+    }
+
+    private void showFailure() {
+        logInButton.setEnabled(true);
+        Toast.makeText(this, "Log in failed: check your details and try again",
+                Toast.LENGTH_LONG).show();
     }
 
     private void goToMain() {

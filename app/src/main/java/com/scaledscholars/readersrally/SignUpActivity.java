@@ -79,11 +79,6 @@ public class SignUpActivity extends AppCompatActivity {
                 });
     }
 
-    /**
-     * Writes users/{uid} and usernames/{lowercaseUsername} in one batch.
-     * The security rules only allow *creating* a usernames doc, so if the name is
-     * already taken the whole batch fails and we remove the new Auth account.
-     */
     private void saveProfile(FirebaseUser user, String username, String email) {
         String uid = user.getUid();
 
@@ -93,6 +88,7 @@ public class SignUpActivity extends AppCompatActivity {
 
         Map<String, Object> claim = new HashMap<>();
         claim.put("uid", uid);
+        claim.put("email", email);
 
         WriteBatch batch = db.batch();
         batch.set(db.collection("users").document(uid), profile);
