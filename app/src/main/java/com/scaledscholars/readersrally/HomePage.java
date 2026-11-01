@@ -39,6 +39,7 @@ public class HomePage extends AppCompatActivity {
         settingsButton.setOnClickListener(v -> {
             View content = getLayoutInflater().inflate(R.layout.dialog_settings, null);
             AlertDialog dialog = new MaterialAlertDialogBuilder(this).setView(content).create();
+            content.findViewById(R.id.closeButton).setOnClickListener(b -> dialog.dismiss());
 
             content.findViewById(R.id.signOutButton).setOnClickListener(b -> {
                 dialog.dismiss();
