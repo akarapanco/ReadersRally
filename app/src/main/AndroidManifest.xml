@@ -39,6 +39,13 @@
         <activity
             android:name=".JoinRequestsActivity"
             android:exported="false" />
+        <activity
+            android:name=".SignUpActivity"
+            android:exported="false"/>
+        <activity
+            android:name=".LogInActivity"
+            android:exported="false"/>
+
     </application>
 
 </manifest>
