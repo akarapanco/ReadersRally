@@ -13,6 +13,7 @@ public class Search
 
         List<Group> results = new ArrayList<>();
 
+        //Base case - If no groups exist and no search term exists
         if (groups == null
          || searchTerm == null) { return results; }
 
@@ -24,15 +25,14 @@ public class Search
             return results;
         }
 
+        //Check each group if the search term is present
         for (Group group : groups)
         {
-
             if (group == null
              || group.getName() == null)    { continue; }
 
             String groupName = group.getName().toLowerCase(Locale.ROOT);
 
-            //Exact match or partially complete
             if (groupName.contains(searchTerm))
             {
                 results.add(group);
@@ -44,7 +44,8 @@ public class Search
 
             for (String word : words)
             {
-                int distance = levenshteinDistance(word, searchTerm);
+                //Use helper function to account for character differences due to typos
+                int distance = incSpellingHelper(word, searchTerm);
 
                 //Allow 3 character differences maximum for individual words in the group name
                 if (distance <= 3)
@@ -76,7 +77,6 @@ public class Search
 
         for (Group group : groups) 
         {
-
             if (group == null
              || group.getId() == null)  { continue; }
 
@@ -89,14 +89,13 @@ public class Search
                 continue;
             }
 
-            //Only allow fuzzy matching for longer IDs
-            if (groupId.length() >= 6
-             && searchTerm.length() >= 6)
+            //Only use character distance matching for IDs if the group ID is longer than 5 digits
+            if (groupId.length() >= 5
+             && searchTerm.length() >= 5)
             {
+                int distance = incSpellingHelper(groupId, searchTerm);
 
-                int distance = levenshteinDistance(groupId, searchTerm);
-
-                //Allow one character difference
+                //Allow a 1-char difference
                 if (distance <= 1)  { results.add(group); }
             }
         }
@@ -104,34 +103,33 @@ public class Search
         return results;
     }
 
-    //Helper function used by both search methods
-    private static int levenshteinDistance(String word1, String word2)
+    //Helper function to calculate character distance (number of characters different from the correct string)
+    private static int incSpellingHelper(String word1, String word2)
     {
 
-        int[][] dp = new int[word1.length() + 1][word2.length() + 1];
+        int[][] charDistances = new int[word1.length() + 1][word2.length() + 1];
 
-        for (int i = 0; i <= word1.length(); i++) { dp[i][0] = i; }
+        for (int i = 0; i <= word1.length(); i++) { charDistances[i][0] = i; }
 
-        for (int j = 0; j <= word2.length(); j++) { dp[0][j] = j; }
+        for (int j = 0; j <= word2.length(); j++) { charDistances[0][j] = j; }
 
         for (int i = 1; i <= word1.length(); i++) 
         {
 
             for (int j = 1; j <= word2.length(); j++)
             {
+                int charsToReplace = 0;
 
-                int cost = 0;
+                if (word1.charAt(i - 1) != word2.charAt(j - 1))    { charsToReplace = 1; }
 
-                if (word1.charAt(i - 1) != word2.charAt(j - 1))    { cost = 1; }
+                int delete = charDistances[i - 1][j] + 1;
+                int insert = charDistances[i][j - 1] + 1;
+                int substitute = charDistances[i - 1][j - 1] + charsToReplace;
 
-                int deletion = dp[i - 1][j] + 1;
-                int insertion = dp[i][j - 1] + 1;
-                int substitution = dp[i - 1][j - 1] + cost;
-
-                dp[i][j] = Math.min(deletion, Math.min(insertion, substitution));
+                charDistances[i][j] = Math.min(delete, Math.min(insert, substitute));
             }
         }
 
-        return dp[word1.length()][word2.length()];
+        return charDistances[word1.length()][word2.length()];
     }
 }

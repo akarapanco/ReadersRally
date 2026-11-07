@@ -43,11 +43,8 @@ public class GroupDetailsActivity extends AppCompatActivity
 
         requestJoinButton = findViewById(R.id.requestJoinButton);
 
-        Button backButton = findViewById(R.id.backButton);
-
-        backButton.setOnClickListener(v -> finish());
-
-        if (groupId == null || groupId.isEmpty())
+        if (groupId == null
+         || groupId.isEmpty())
         {
             Toast.makeText(this, "Group not found.", Toast.LENGTH_SHORT).show();
             finish();
@@ -57,29 +54,13 @@ public class GroupDetailsActivity extends AppCompatActivity
 
         loadGroupDetails();
 
-        requestJoinButton.setOnClickListener(v -> {
-            Toast.makeText(
-                    this,
-                    "Join request sent (not really)",
-                    Toast.LENGTH_SHORT
-            ).show();
-        });
+        requestJoinButton.setOnClickListener(v ->
+        { Toast.makeText(this, "Join request sent (to nobody)", Toast.LENGTH_SHORT).show();});
     }
 
     private void loadGroupDetails()
     {
-
-        db.collection("groups")
-                .document(groupId)
-                .get()
-                .addOnSuccessListener(this::displayGroupDetails)
-                .addOnFailureListener(e -> {
-                    Toast.makeText(
-                            this,
-                            "Failed to load group: " + e.getMessage(),
-                            Toast.LENGTH_LONG
-                    ).show();
-                });
+        //Use with firestore
     }
 
     private void displayGroupDetails(DocumentSnapshot doc)
@@ -123,7 +104,8 @@ public class GroupDetailsActivity extends AppCompatActivity
 
     private String valueOrDefault(String value)
     {
-        if (value == null || value.trim().isEmpty())
+        if (value == null
+         || value.trim().isEmpty())
         { return "Not specified"; }
 
         return value;

@@ -11,12 +11,7 @@
         android:orientation="vertical"
         android:padding="24dp">
 
-        <!-- Back Button -->
-        <Button
-            android:id="@+id/backButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Back" />
+
 
         <!-- Group Name -->
         <TextView

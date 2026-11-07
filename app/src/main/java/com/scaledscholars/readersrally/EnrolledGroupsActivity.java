@@ -68,7 +68,7 @@ public class EnrolledGroupsActivity extends AppCompatActivity {
 
     private void openDiscussionForum(Group group) {
         Intent intent = new Intent(this, DiscussionForumActivity.class);
-        intent.putExtra(DiscussionForumActivity.EXTRA_GROUP_ID, group.id);
+        intent.putExtra(DiscussionForumActivity.EXTRA_GROUP_ID, group.getId());
         startActivity(intent);
     }
 }
