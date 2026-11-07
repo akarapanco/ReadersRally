@@ -3,6 +3,32 @@
     <style name="Base.Theme.ReadersRally" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your light theme here. -->
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+        <item name="android:fontFamily">@font/pangolin</item>
+        <item name="fontFamily">@font/pangolin</item>
+        <item name="android:textColor">@color/beige</item> <!-- text color -->
+        <item name="android:windowBackground">@color/dark_teal</item> <!-- screen bg color -->
+        <item name="colorSurface">@color/light_teal</item> <!-- popup fill -->
+        <item name="materialButtonStyle">@style/Widget.AppCompat.Button</item> <!-- button theme override -->
+
+    </style>
+    <style name="Widget.AppCompat.Button" parent="Widget.Material3.Button">
+        <item name="backgroundTint">@color/dark_violet</item>
+        <item name="android:textColor">@color/dark_beige</item>
+        <item name="android:gravity">center</item>
+        <item name="android:includeFontPadding">false</item>
+        <item name="android:textSize">20sp</item>
+    </style>
+
+    <style name="HeaderTextStyle" parent="Widget.Material3.CheckedTextView">
+        <item name="android:textSize"> 25sp </item>
+        <item name="android:textColor">@color/beige</item>
+        <item name="android:gravity">center</item>
+        <item name="android:padding">16dp</item>
+        <item name="android:layout_marginTop">24dp</item>
+        <item name="layout_constraintTop_toTopOf">parent</item>
+        <item name="layout_constraintStart_toStartOf">parent</item>
+        <item name="layout_constraintEnd_toEndOf">parent</item>
+
     </style>
 
     <style name="Theme.ReadersRally" parent="Base.Theme.ReadersRally" />

@@ -1,30 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/linearLayout"
+    android:fitsSystemWindows="true"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:gravity="center_vertical"
-    android:padding="24dp">
+    android:layout_height="match_parent">
 
-    <Button
-        android:id="@+id/enrolledGroupsButton"
-        android:layout_width="match_parent"
+    <TextView
+        android:id="@+id/myGroupsHeader"
+        style="@style/HeaderTextStyle"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
-        android:text="Enrolled Groups" />
+        android:text="@string/my_groups_header"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
-        android:id="@+id/bookmarkedGroupsButton"
-        android:layout_width="match_parent"
+    <LinearLayout
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
-        android:text="Bookmarked Groups" />
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-    <Button
-        android:id="@+id/joinRequestsButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Join Requests" />
+        <Button
+            android:id="@+id/enrolledGroupsButton"
+            android:layout_width="250dp"
+            android:layout_height="60dp"
+            android:textSize="28sp"
+            android:text="Enrolled Groups" />
 
-</LinearLayout>
+        <Button
+            android:id="@+id/bookmarkedGroupsButton"
+            android:layout_width="250dp"
+            android:layout_height="60dp"
+            android:layout_marginTop="12dp"
+            android:textSize="22sp"
+            android:text="Bookmarked Groups" />
+
+        <Button
+            android:id="@+id/joinRequestsButton"
+            android:layout_width="250dp"
+            android:layout_height="60dp"
+            android:layout_marginTop="12dp"
+            android:textSize="28sp"
+            android:text="Join Requests" />
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

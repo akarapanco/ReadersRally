@@ -6,6 +6,7 @@
         Test 1\n\nTest 2\n\nTest 3\n\nTest 4\n\nTest 5\n\nTest 6\n\nTest 7\n\nTest 8\n\nTest 9\n\nTest 10
     </string>
     <string name="more">More…</string>
+<<<<<<< HEAD
 
     <!-- Browse Groups -->
     <string name="group_unnamed">Unnamed Group</string>
@@ -16,4 +17,20 @@
     <string name="group_members_unknown">Members: Not specified</string>
     <string name="group_selected">Selected: %1$s</string>
 
+=======
+    <string name="homepage_header">ReadersRally - Home</string>
+    <string name="my_groups_header">ReadersRally - My Groups</string>
+    <string name="discussions_header">ReadersRally - Discussions</string>
+    <string name="back">Back</string>
+    <string name="repliesOff">Replies are turned off for this post.</string>
+    <string name="title_activity_sign_up">SignUpActivity</string>
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password</string>
+    <string name="action_sign_in">Sign in or register</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="welcome">"Welcome !"</string>
+    <string name="invalid_username">Not a valid username</string>
+    <string name="invalid_password">Password must be >5 characters</string>
+    <string name="login_failed">"Login failed"</string>
+>>>>>>> origin/main
 </resources>

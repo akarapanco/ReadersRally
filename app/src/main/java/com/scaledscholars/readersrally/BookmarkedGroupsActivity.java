@@ -21,6 +21,7 @@ public class BookmarkedGroupsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bookmarked_groups);
+        findViewById(R.id.backButton).setOnClickListener(v -> finish());
 
         db = FirebaseFirestore.getInstance();
 

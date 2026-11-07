@@ -3,8 +3,8 @@ package com.scaledscholars.readersrally;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 import android.widget.Button;
+import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
@@ -13,14 +13,20 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
     private static final String CURRENT_USER_ID = "O4ONRhlDs0BqdozYLG1t";
     private List<Post> posts;
     private OnDeleteListener listener;
+    private OnOpenListener openListener;
 
     public interface OnDeleteListener {
         void onDelete(Post post);
     }
 
-    public PostAdapter(List<Post> posts, OnDeleteListener listener) {
+    public interface OnOpenListener {
+        void onOpen(Post post);
+    }
+
+    public PostAdapter(List<Post> posts, OnDeleteListener listener, OnOpenListener openListener) {
         this.posts = posts;
         this.listener = listener;
+        this.openListener = openListener;
     }
 
     @NonNull
@@ -34,9 +40,10 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
     @Override
     public void onBindViewHolder(@NonNull PostViewHolder holder, int position) {
         Post post = posts.get(position);
-        holder.genreBookText.setText(post.book);
-        holder.contentText.setText(post.content);
-        holder.repliesText.setText(post.repliesEnabled ? "Replies on" : "Replies off");
+        holder.titleText.setText(post.title != null && !post.title.isEmpty() ? post.title : post.book);
+        holder.authorText.setText(post.authorName != null && !post.authorName.isEmpty() ? "by " + post.authorName : "");
+
+        holder.openButton.setOnClickListener(v -> openListener.onOpen(post));
 
         if (CURRENT_USER_ID.equals(post.authorId)) {
             holder.deleteButton.setVisibility(View.VISIBLE);
@@ -52,15 +59,15 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
     }
 
     static class PostViewHolder extends RecyclerView.ViewHolder {
-        TextView genreBookText, contentText, repliesText;
-        Button deleteButton;
+        TextView titleText, authorText;
+        Button deleteButton, openButton;
 
         PostViewHolder(View itemView) {
             super(itemView);
-            genreBookText = itemView.findViewById(R.id.genreBookText);
-            contentText = itemView.findViewById(R.id.contentText);
-            repliesText = itemView.findViewById(R.id.repliesText);
+            titleText = itemView.findViewById(R.id.titleText);
+            authorText = itemView.findViewById(R.id.authorText);
             deleteButton = itemView.findViewById(R.id.deleteButton);
+            openButton = itemView.findViewById(R.id.openButton);
         }
     }
 }

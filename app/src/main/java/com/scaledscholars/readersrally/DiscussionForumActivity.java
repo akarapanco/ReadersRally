@@ -23,12 +23,13 @@ public class DiscussionForumActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_discussion_forum);
+        findViewById(R.id.backButton).setOnClickListener(v -> finish());
         db = FirebaseFirestore.getInstance();
         groupId = getIntent().getStringExtra(EXTRA_GROUP_ID);
 
         RecyclerView recyclerView = findViewById(R.id.postsRecyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        adapter = new PostAdapter(postList, this::deletePost);
+        adapter = new PostAdapter(postList, this::deletePost, this::openPost);
         recyclerView.setAdapter(adapter);
 
         Button createPostButton = findViewById(R.id.createPostButton);
@@ -37,14 +38,11 @@ public class DiscussionForumActivity extends AppCompatActivity {
             intent.putExtra(CreatePostActivity.EXTRA_GROUP_ID, groupId);
             startActivity(intent);
         });
-
-        loadPosts();
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        postList.clear();
         loadPosts();
     }
 
@@ -56,22 +54,33 @@ public class DiscussionForumActivity extends AppCompatActivity {
             .addOnSuccessListener(querySnapshot -> {
                 postList.clear();
                 for (var doc : querySnapshot) {
-                    Post post = new Post(
+                    postList.add(new Post(
                         doc.getId(),
                         doc.getString("groupId"),
                         doc.getString("authorId"),
-                        doc.getString("genre"),
+                        doc.getString("authorName"),
+                        doc.getString("title"),
                         doc.getString("book"),
                         doc.getString("content"),
                         Boolean.TRUE.equals(doc.getBoolean("repliesEnabled")),
                         doc.getLong("createdAt") != null ? doc.getLong("createdAt") : 0
-                    );
-                    postList.add(post);
+                    ));
                 }
                 adapter.notifyDataSetChanged();
             })
             .addOnFailureListener(e ->
                 Toast.makeText(this, "Failed to load posts", Toast.LENGTH_SHORT).show());
+    }
+
+    private void openPost(Post post) {
+        Intent intent = new Intent(this, PostDetailActivity.class);
+        intent.putExtra(PostDetailActivity.EXTRA_POST_ID, post.id);
+        intent.putExtra(PostDetailActivity.EXTRA_BOOK, post.book);
+        intent.putExtra(PostDetailActivity.EXTRA_TITLE, post.title);
+        intent.putExtra(PostDetailActivity.EXTRA_AUTHOR, post.authorName);
+        intent.putExtra(PostDetailActivity.EXTRA_CONTENT, post.content);
+        intent.putExtra(PostDetailActivity.EXTRA_REPLIES_ENABLED, post.repliesEnabled);
+        startActivity(intent);
     }
 
     private void deletePost(Post post) {

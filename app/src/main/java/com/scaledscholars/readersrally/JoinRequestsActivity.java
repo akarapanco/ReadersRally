@@ -18,6 +18,7 @@ public class JoinRequestsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_join_requests);
+        findViewById(R.id.backButton).setOnClickListener(v -> finish());
         db = FirebaseFirestore.getInstance();
         RecyclerView recyclerView = findViewById(R.id.joinRequestsRecyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
