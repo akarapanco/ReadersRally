@@ -35,6 +35,14 @@ public class HomePage extends AppCompatActivity {
             startActivity(new Intent(this, MyGroupsActivity.class));
         });
 
+        // BROWSEGROUPS - activity for button
+        Button browseGroupsButton = findViewById(R.id.browseGroupsButton);
+
+        browseGroupsButton.setOnClickListener(v -> {
+            Intent intent = new Intent(this, BrowseGroupsActivity.class);
+            startActivity(intent);
+        });
+
         ImageButton settingsButton = findViewById(R.id.settingsButton);
         settingsButton.setOnClickListener(v -> {
             View content = getLayoutInflater().inflate(R.layout.dialog_settings, null);

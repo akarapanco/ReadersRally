@@ -29,8 +29,8 @@
         android:id="@+id/myGroupsSummary"
         android:layout_width="261dp"
         android:layout_height="180dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="11dp"
+        android:layout_marginStart="136dp"
+        android:layout_marginTop="12dp"
         android:scrollbarStyle="insideInset"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView3">
@@ -55,6 +55,16 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/myGroupsSummary" />
 
+    <Button
+        android:id="@+id/browseGroupsButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="180dp"
+        android:text="Browse Groups"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.511"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/myGroupsSummary" />
     <ImageButton
         android:id="@+id/settingsButton"
         android:layout_width="40dp"

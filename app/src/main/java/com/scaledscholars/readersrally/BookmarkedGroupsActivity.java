@@ -59,7 +59,7 @@ public class BookmarkedGroupsActivity extends AppCompatActivity {
 
     private void removeBookmark(Group group) {
         db.collection("users").document(CURRENT_USER_ID)
-            .update("bookmarkedGroupIds", FieldValue.arrayRemove(group.id))
+            .update("bookmarkedGroupIds", FieldValue.arrayRemove(group.getId()))
             .addOnSuccessListener(unused -> {
                 bookmarkedGroups.remove(group);
                 adapter.notifyDataSetChanged();
