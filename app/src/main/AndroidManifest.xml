@@ -24,6 +24,12 @@
             </intent-filter>
         </activity>
         <activity
+            android:name=".BrowseGroupsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".GroupDetailsActivity"
+            android:exported="false" />
+        <activity
             android:name=".MyGroupsActivity"
             android:exported="false" />
         <activity

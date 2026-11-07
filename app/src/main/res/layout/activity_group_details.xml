@@ -8,9 +8,9 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@color/light_teal"
         android:orientation="vertical"
         android:padding="24dp">
-
 
 
         <!-- Group Name -->
@@ -20,9 +20,9 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:text="Group Name"
+            android:textColor="#212121"
             android:textSize="28sp"
-            android:textStyle="bold"
-            android:textColor="#212121" />
+            android:textStyle="bold" />
 
         <!-- Group Biography -->
         <TextView
@@ -30,9 +30,9 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
             android:text="About This Group"
+            android:textColor="#212121"
             android:textSize="20sp"
-            android:textStyle="bold"
-            android:textColor="#212121" />
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/groupDetailsBio"
@@ -40,8 +40,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:text="Group biography will appear here."
-            android:textSize="16sp"
-            android:textColor="#555555" />
+            android:textColor="#555555"
+            android:textSize="16sp" />
 
         <!-- Group Information -->
         <TextView
@@ -49,9 +49,9 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="28dp"
             android:text="Group Information"
+            android:textColor="#212121"
             android:textSize="20sp"
-            android:textStyle="bold"
-            android:textColor="#212121" />
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/groupDetailsGenre"

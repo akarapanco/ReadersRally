@@ -69,8 +69,8 @@ public class GroupDetailsActivity extends AppCompatActivity
         if (!doc.exists())
         {
             Toast.makeText(this, "Group does not exist.", Toast.LENGTH_SHORT).show();
-            finish();
 
+            finish();
             return;
         }
 
