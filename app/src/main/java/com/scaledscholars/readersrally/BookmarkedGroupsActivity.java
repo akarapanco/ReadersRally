@@ -11,7 +11,7 @@ import java.util.List;
 
 public class BookmarkedGroupsActivity extends AppCompatActivity {
 
-    private static final String CURRENT_USER_ID = "O4ONRhlDs0BqdozYLG1t";
+    private final String CURRENT_USER_ID = CurrentUser.id();
 
     private FirebaseFirestore db;
     private List<Group> bookmarkedGroups = new ArrayList<>();
