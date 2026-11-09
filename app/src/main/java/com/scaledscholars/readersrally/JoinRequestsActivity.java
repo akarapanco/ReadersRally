@@ -55,12 +55,15 @@ public class JoinRequestsActivity extends AppCompatActivity {
     }
 
     private void attachDetailsAndAdd(JoinRequest request) {
+        if (request.groupId == null) return;
         db.collection("groups").document(request.groupId).get()
             .addOnSuccessListener(groupDoc -> {
+                String creator = groupDoc.getString("createdBy");
+                if (!CurrentUser.id().equals(creator)) return;
                 request.groupName = groupDoc.getString("name");
                 db.collection("users").document(request.userId).get()
                     .addOnSuccessListener(userDoc -> {
-                        request.userEmail = userDoc.getString("email");
+                        request.userEmail = userDoc.getString("username");
                         requestList.add(request);
                         adapter.notifyDataSetChanged();
                     });
