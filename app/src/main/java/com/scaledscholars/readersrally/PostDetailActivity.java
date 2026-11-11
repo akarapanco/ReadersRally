@@ -6,6 +6,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -23,7 +24,7 @@ public class PostDetailActivity extends AppCompatActivity {
     public static final String EXTRA_AUTHOR = "authorName";
     public static final String EXTRA_CONTENT = "content";
     public static final String EXTRA_REPLIES_ENABLED = "repliesEnabled";
-    private static final String CURRENT_USER_ID = "O4ONRhlDs0BqdozYLG1t";
+    private final String CURRENT_USER_ID = CurrentUser.id();
 
     private FirebaseFirestore db;
     private String postId;
@@ -51,7 +52,7 @@ public class PostDetailActivity extends AppCompatActivity {
 
         RecyclerView recyclerView = findViewById(R.id.repliesRecyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        adapter = new ReplyAdapter(replyList, this::deleteReply);
+        adapter = new ReplyAdapter(replyList, this::deleteReply, this::editReply);
         recyclerView.setAdapter(adapter);
 
         replyEditText = findViewById(R.id.replyEditText);
@@ -74,13 +75,15 @@ public class PostDetailActivity extends AppCompatActivity {
             .addOnSuccessListener(querySnapshot -> {
                 replyList.clear();
                 for (var doc : querySnapshot) {
-                    replyList.add(new Reply(
+                    Reply r = new Reply(
                         doc.getId(),
                         doc.getString("postId"),
                         doc.getString("authorId"),
                         doc.getString("content"),
                         doc.getLong("createdAt") != null ? doc.getLong("createdAt") : 0
-                    ));
+                    );
+                    r.authorName = doc.getString("authorName");
+                    replyList.add(r);
                 }
                 Collections.sort(replyList, (a, b) -> Long.compare(a.createdAt, b.createdAt));
                 adapter.notifyDataSetChanged();
@@ -96,20 +99,53 @@ public class PostDetailActivity extends AppCompatActivity {
             return;
         }
 
-        Map<String, Object> replyData = new HashMap<>();
-        replyData.put("postId", postId);
-        replyData.put("authorId", CURRENT_USER_ID);
-        replyData.put("content", content);
-        replyData.put("createdAt", System.currentTimeMillis());
+        db.collection("users").document(CURRENT_USER_ID).get()
+            .addOnSuccessListener(userDoc -> {
+                String name = userDoc.getString("username");
+                Map<String, Object> replyData = new HashMap<>();
+                replyData.put("postId", postId);
+                replyData.put("authorId", CURRENT_USER_ID);
+                replyData.put("authorName", name != null ? name : "Unknown");
+                replyData.put("content", content);
+                replyData.put("createdAt", System.currentTimeMillis());
 
-        db.collection("replies")
-            .add(replyData)
-            .addOnSuccessListener(ref -> {
-                replyEditText.setText("");
-                loadReplies();
+                db.collection("replies")
+                    .add(replyData)
+                    .addOnSuccessListener(ref -> {
+                        replyEditText.setText("");
+                        loadReplies();
+                    })
+                    .addOnFailureListener(e ->
+                        Toast.makeText(this, "Failed to add reply", Toast.LENGTH_SHORT).show());
             })
             .addOnFailureListener(e ->
                 Toast.makeText(this, "Failed to add reply", Toast.LENGTH_SHORT).show());
+    }
+
+    private void editReply(Reply reply) {
+        EditText input = new EditText(this);
+        input.setText(reply.content);
+        new AlertDialog.Builder(this)
+            .setTitle("Edit reply")
+            .setView(input)
+            .setPositiveButton("Save", (d, w) -> {
+                String newText = input.getText().toString().trim();
+                if (newText.isEmpty()) {
+                    Toast.makeText(this, "Reply can't be empty", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                db.collection("replies").document(reply.id)
+                    .update("content", newText)
+                    .addOnSuccessListener(unused -> {
+                        reply.content = newText;
+                        adapter.notifyDataSetChanged();
+                        Toast.makeText(this, "Reply updated", Toast.LENGTH_SHORT).show();
+                    })
+                    .addOnFailureListener(e ->
+                        Toast.makeText(this, "Failed to update reply", Toast.LENGTH_SHORT).show());
+            })
+            .setNegativeButton("Cancel", null)
+            .show();
     }
 
     private void deleteReply(Reply reply) {

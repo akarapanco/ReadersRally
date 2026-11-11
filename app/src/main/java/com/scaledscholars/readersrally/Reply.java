@@ -6,6 +6,7 @@ public class Reply {
     public String authorId;
     public String content;
     public long createdAt;
+    public String authorName;
 
     public Reply() {}
 
