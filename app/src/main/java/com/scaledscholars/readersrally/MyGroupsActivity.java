@@ -40,6 +40,12 @@ public class MyGroupsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_groups);
+        findViewById(R.id.backButton).setOnClickListener(v -> {
+            android.content.Intent home = new android.content.Intent(this, HomePage.class);
+            home.addFlags(android.content.Intent.FLAG_ACTIVITY_CLEAR_TOP | android.content.Intent.FLAG_ACTIVITY_SINGLE_TOP);
+            startActivity(home);
+            finish();
+        });
         Button enrolledButton = findViewById(R.id.enrolledGroupsButton);
         Button bookmarkedButton = findViewById(R.id.bookmarkedGroupsButton);
         Button joinRequestsButton = findViewById(R.id.joinRequestsButton);
