@@ -4,13 +4,19 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Switch;
+import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
+import androidx.appcompat.app.AlertDialog;
+import com.google.firebase.firestore.FirebaseFirestore;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 
 public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder> {
-    private static final String CURRENT_USER_ID = "O4ONRhlDs0BqdozYLG1t";
+    private final String CURRENT_USER_ID = CurrentUser.id();
     private List<Post> posts;
     private OnDeleteListener listener;
     private OnOpenListener openListener;
@@ -47,10 +53,65 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
 
         if (CURRENT_USER_ID.equals(post.authorId)) {
             holder.deleteButton.setVisibility(View.VISIBLE);
+            holder.editButton.setVisibility(View.VISIBLE);
+            holder.editButton.setOnClickListener(v -> showEditDialog(v.getContext(), post));
             holder.deleteButton.setOnClickListener(v -> listener.onDelete(post));
         } else {
             holder.deleteButton.setVisibility(View.GONE);
+            holder.editButton.setVisibility(View.GONE);
         }
+    }
+
+    private void showEditDialog(android.content.Context ctx, Post post) {
+        LinearLayout box = new LinearLayout(ctx);
+        box.setOrientation(LinearLayout.VERTICAL);
+        int pad = (int) (20 * ctx.getResources().getDisplayMetrics().density);
+        box.setPadding(pad, pad / 2, pad, 0);
+
+        EditText titleInput = new EditText(ctx);
+        titleInput.setHint("Title");
+        titleInput.setText(post.title);
+        EditText contentInput = new EditText(ctx);
+        contentInput.setHint("Post");
+        contentInput.setText(post.content);
+        EditText bookInput = new EditText(ctx);
+        bookInput.setHint("Book");
+        bookInput.setText(post.book);
+        Switch repliesSwitch = new Switch(ctx);
+        repliesSwitch.setText("Allow replies");
+        repliesSwitch.setChecked(post.repliesEnabled);
+        box.addView(titleInput);
+        box.addView(bookInput);
+        box.addView(contentInput);
+        box.addView(repliesSwitch);
+
+        new AlertDialog.Builder(ctx)
+            .setTitle("Edit post")
+            .setView(box)
+            .setPositiveButton("Save", (d, w) -> {
+                String newTitle = titleInput.getText().toString().trim();
+                String newContent = contentInput.getText().toString().trim();
+                String newBook = bookInput.getText().toString().trim();
+                boolean newReplies = repliesSwitch.isChecked();
+                if (newContent.isEmpty()) {
+                    Toast.makeText(ctx, "Post can't be empty", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                FirebaseFirestore.getInstance().collection("posts").document(post.id)
+                    .update("title", newTitle, "book", newBook, "content", newContent, "repliesEnabled", newReplies)
+                    .addOnSuccessListener(unused -> {
+                        post.title = newTitle;
+                        post.content = newContent;
+                        post.book = newBook;
+                        post.repliesEnabled = newReplies;
+                        notifyDataSetChanged();
+                        Toast.makeText(ctx, "Post updated", Toast.LENGTH_SHORT).show();
+                    })
+                    .addOnFailureListener(e ->
+                        Toast.makeText(ctx, "Failed to update post", Toast.LENGTH_SHORT).show());
+            })
+            .setNegativeButton("Cancel", null)
+            .show();
     }
 
     @Override
@@ -60,7 +121,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
 
     static class PostViewHolder extends RecyclerView.ViewHolder {
         TextView titleText, authorText;
-        Button deleteButton, openButton;
+        Button deleteButton, openButton, editButton;
 
         PostViewHolder(View itemView) {
             super(itemView);
@@ -68,6 +129,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
             authorText = itemView.findViewById(R.id.authorText);
             deleteButton = itemView.findViewById(R.id.deleteButton);
             openButton = itemView.findViewById(R.id.openButton);
+            editButton = itemView.findViewById(R.id.editButton);
         }
     }
 }
