@@ -29,7 +29,6 @@ public class HomePage extends AppCompatActivity {
             return insets;
         });
 
-        // MYGROUPS - activity for button - move me to new file!
         Button myGroupsButton = findViewById(R.id.myGroupsButton);
         myGroupsButton.setOnClickListener(v -> {
             startActivity(new Intent(this, MyGroupsActivity.class));
@@ -59,5 +58,36 @@ public class HomePage extends AppCompatActivity {
             dialog.show();
         });
 
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        loadMyGroups();
+    }
+
+    @SuppressWarnings("unchecked")
+    private void loadMyGroups() {
+        android.widget.TextView summary = findViewById(R.id.textView4);
+        String uid = CurrentUser.id();
+        if (uid == null || uid.isEmpty()) { return; }
+        com.google.firebase.firestore.FirebaseFirestore db = com.google.firebase.firestore.FirebaseFirestore.getInstance();
+        db.collection("users").document(uid).get().addOnSuccessListener(userDoc -> {
+            java.util.List<String> ids = (java.util.List<String>) userDoc.get("enrolledGroupIds");
+            if (ids == null || ids.isEmpty()) {
+                summary.setText("No groups yet");
+                return;
+            }
+            summary.setText("");
+            for (String id : ids) {
+                db.collection("groups").document(id).get().addOnSuccessListener(groupDoc -> {
+                    String name = groupDoc.getString("name");
+                    if (name != null) {
+                        CharSequence current = summary.getText();
+                        summary.setText(current.length() == 0 ? name : current + "\n" + name);
+                    }
+                });
+            }
+        });
     }
 }
