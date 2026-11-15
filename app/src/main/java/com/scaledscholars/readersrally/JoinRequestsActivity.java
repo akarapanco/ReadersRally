@@ -63,7 +63,13 @@ public class JoinRequestsActivity extends AppCompatActivity {
                 request.groupName = groupDoc.getString("name");
                 db.collection("users").document(request.userId).get()
                     .addOnSuccessListener(userDoc -> {
-                        request.userEmail = userDoc.getString("username");
+
+                        //request.userEmail = userDoc.getString("username"); Upstream conflict, may remove if not needed
+
+                        request.username = userDoc.getString("username");
+
+                        if (request.username == null)   { request.username = request.userId; }
+;
                         requestList.add(request);
                         adapter.notifyDataSetChanged();
                     });
