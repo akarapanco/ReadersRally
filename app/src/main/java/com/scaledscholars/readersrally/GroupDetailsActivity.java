@@ -40,6 +40,8 @@ public class GroupDetailsActivity extends AppCompatActivity
 
         setContentView(R.layout.activity_group_details);
 
+        findViewById(R.id.backButton).setOnClickListener(v -> finish());
+
         db = FirebaseFirestore.getInstance();
 
         //Get selected group ID
@@ -109,6 +111,8 @@ public class GroupDetailsActivity extends AppCompatActivity
         String genre = doc.getString("genre");
         String book = doc.getString("bookTitle");
         String communication = doc.getString("communicationMethod");
+        String creator = doc.getString("createdBy");
+        if (creator != null && creator.equals(CurrentUser.id())) { requestJoinButton.setVisibility(View.GONE); }
 
         Long bookLength = doc.getLong("bookLength");
         Long members = doc.getLong("currentMembers");
@@ -137,7 +141,7 @@ public class GroupDetailsActivity extends AppCompatActivity
                     List<String> enrolledGroupIds = (List<String>) doc.get("enrolledGroupIds");
 
                     if (enrolledGroupIds != null
-                     && enrolledGroupIds.contains(groupId))     { settingsButton.setVisibility(Button.VISIBLE); }
+                     && enrolledGroupIds.contains(groupId))     { settingsButton.setVisibility(Button.VISIBLE); requestJoinButton.setVisibility(View.GONE); }
                 });
     }
 

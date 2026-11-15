@@ -45,6 +45,8 @@ public class BrowseGroupsActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_browse_groups);
+
+        findViewById(R.id.backButton).setOnClickListener(v -> finish());
         db = FirebaseFirestore.getInstance();
 
         groups = new ArrayList<>();
