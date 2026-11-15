@@ -54,6 +54,7 @@ public class GroupAdapter extends RecyclerView.Adapter<GroupAdapter.GroupViewHol
         {
             holder.forumButton.setVisibility(View.VISIBLE);
             holder.forumButton.setOnClickListener(v -> forumClickListener.onGroupClicked(group));
+            holder.itemView.setOnClickListener(v -> forumClickListener.onGroupClicked(group));
         }
         else    { holder.forumButton.setVisibility(View.GONE); }
     }

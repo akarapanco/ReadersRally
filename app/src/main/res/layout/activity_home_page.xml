@@ -35,12 +35,11 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView3">
 
-        <TextView
-            android:id="@+id/textView4"
+        <LinearLayout
+            android:id="@+id/myGroupsList"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/testScroll"
-            android:textSize="20sp" />
+            android:orientation="vertical" />
     </ScrollView>
 
     <Button

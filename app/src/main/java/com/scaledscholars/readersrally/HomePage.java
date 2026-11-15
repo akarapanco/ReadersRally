@@ -68,26 +68,41 @@ public class HomePage extends AppCompatActivity {
 
     @SuppressWarnings("unchecked")
     private void loadMyGroups() {
-        android.widget.TextView summary = findViewById(R.id.textView4);
+        android.widget.LinearLayout list = findViewById(R.id.myGroupsList);
         String uid = CurrentUser.id();
         if (uid == null || uid.isEmpty()) { return; }
         com.google.firebase.firestore.FirebaseFirestore db = com.google.firebase.firestore.FirebaseFirestore.getInstance();
         db.collection("users").document(uid).get().addOnSuccessListener(userDoc -> {
             java.util.List<String> ids = (java.util.List<String>) userDoc.get("enrolledGroupIds");
+            list.removeAllViews();
             if (ids == null || ids.isEmpty()) {
-                summary.setText("No groups yet");
+                addGroupRow(list, "No groups yet", null);
                 return;
             }
-            summary.setText("");
             for (String id : ids) {
                 db.collection("groups").document(id).get().addOnSuccessListener(groupDoc -> {
                     String name = groupDoc.getString("name");
                     if (name != null) {
-                        CharSequence current = summary.getText();
-                        summary.setText(current.length() == 0 ? name : current + "\n" + name);
+                        addGroupRow(list, name, id);
                     }
                 });
             }
         });
+    }
+
+    private void addGroupRow(android.widget.LinearLayout list, String name, String groupId) {
+        android.widget.TextView row = new android.widget.TextView(this);
+        row.setText(name);
+        row.setTextSize(20);
+        int pad = (int) (6 * getResources().getDisplayMetrics().density);
+        row.setPadding(0, pad, 0, pad);
+        if (groupId != null) {
+            row.setOnClickListener(v -> {
+                Intent intent = new Intent(this, DiscussionForumActivity.class);
+                intent.putExtra(DiscussionForumActivity.EXTRA_GROUP_ID, groupId);
+                startActivity(intent);
+            });
+        }
+        list.addView(row);
     }
 }
