@@ -7,7 +7,7 @@ public class JoinRequest {
     public String message;
     public String status;
     public String groupName;
-    public String userEmail;
+    public String username;
 
     public JoinRequest() {}
 

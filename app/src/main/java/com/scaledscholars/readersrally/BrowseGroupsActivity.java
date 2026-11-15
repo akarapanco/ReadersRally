@@ -20,7 +20,7 @@ import java.util.Locale;
 
 public class BrowseGroupsActivity extends AppCompatActivity
 {
-    private FirebaseFirestore db; //Use when firestore database created
+    private FirebaseFirestore db;
     private List<Group> groups;
     private List<Group> displayedGroups;
     private BrowseGroupsAdapter adapter;
@@ -45,6 +45,7 @@ public class BrowseGroupsActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_browse_groups);
+        db = FirebaseFirestore.getInstance();
 
         groups = new ArrayList<>();
         displayedGroups = new ArrayList<>();
@@ -87,21 +88,45 @@ public class BrowseGroupsActivity extends AppCompatActivity
 
         filterButton.setOnClickListener(v -> showFilterDialog());
 
-
-
         //Load groups from firestore function
         loadGroups();
     }
 
-    // Load groups from local test data
+    //Load groups from Firestore
     private void loadGroups()
     {
-        groups.clear();
+        db.collection("groups").get().addOnSuccessListener(querySnapshot ->
+                {
+                    //Clear any prepopulated groups
+                    groups.clear();
 
-        groups.addAll(TestGroups.getTestGroups());
+                    for (DocumentSnapshot doc : querySnapshot.getDocuments())
+                    {
+                        String id = doc.getId();
+                        String name = doc.getString("name");
+                        String genre = doc.getString("genre");
+                        String bookTitle = doc.getString("bookTitle");
+                        String communication = doc.getString("communicationMethod");
+                        Long bookLengthValue = doc.getLong("bookLength");
+                        Long groupSizeValue = doc.getLong("groupSize");
+                        Integer bookLength = null;
+                        Integer groupSize = null;
 
-        updateDisplayedGroups();
+                        //Null value check for book/member-dependent parameters
+                        if (bookLengthValue != null)    { bookLength = bookLengthValue.intValue(); }
+                        if (groupSizeValue != null)     { groupSize = groupSizeValue.intValue(); }
+
+                        //Add the next group in the database to the list of populated groups
+                        Group group = new Group(id, name, genre, bookTitle, bookLength, communication, groupSize);
+                        groups.add(group);
+                    }
+
+                    updateDisplayedGroups();
+                })
+                .addOnFailureListener(e ->
+                { Toast.makeText(this, "Unable to load groups: " + e.getMessage(), Toast.LENGTH_LONG).show(); });
     }
+
 
     //Update groups taking into account both search field and selected filters
     private void updateDisplayedGroups()
@@ -120,8 +145,7 @@ public class BrowseGroupsActivity extends AppCompatActivity
             String name = group.getName();
             String id = group.getId();
 
-            if (searchText.isEmpty())
-            { displayedGroups.add(group); }
+            if (searchText.isEmpty())   { displayedGroups.add(group); }
             else
             {
                 boolean matchesName = name != null
@@ -130,7 +154,8 @@ public class BrowseGroupsActivity extends AppCompatActivity
                 boolean matchesId = id != null
                                  && id.toLowerCase(Locale.ROOT).contains(searchText);
 
-                if (matchesName || matchesId) { displayedGroups.add(group); }
+                if (matchesName == true
+                 || matchesId == true) { displayedGroups.add(group); }
             }
         }
 
@@ -215,7 +240,6 @@ public class BrowseGroupsActivity extends AppCompatActivity
                 .setPositiveButton("Apply Filters", (d, which) ->
                 {
                     selectedGenre = genreSpinner.getSelectedItem().toString();
-
                     selectedCommunication = communicationSpinner.getSelectedItem().toString();
 
                     if (selectedGenre.equals("Any")) { selectedGenre = null; }
@@ -223,11 +247,8 @@ public class BrowseGroupsActivity extends AppCompatActivity
                     if (selectedCommunication.equals("Any")) { selectedCommunication = null; }
 
                     int minBookSelected = bookSlider.getValues().get(0).intValue();
-
                     int maxBookSelected = bookSlider.getValues().get(1).intValue();
-
                     int minSizeSelected = sizeSlider.getValues().get(0).intValue();
-
                     int maxSizeSelected = sizeSlider.getValues().get(1).intValue();
 
                     //Book length filter
@@ -293,19 +314,15 @@ public class BrowseGroupsActivity extends AppCompatActivity
         int maxBook = bookSlider.getValues().get(1).intValue();
 
         if (minBook == 0
-         && maxBook == 1000)
-        { bookValue.setText("Any book length"); }
-        else
-        { bookValue.setText(minBook + " - " + maxBook + " pages"); }
+         && maxBook == 1000)    { bookValue.setText("Any book length"); }
+        else    { bookValue.setText(minBook + " - " + maxBook + " pages"); }
 
         int minSize = sizeSlider.getValues().get(0).intValue();
         int maxSize = sizeSlider.getValues().get(1).intValue();
 
         if (minSize == 1
-         && maxSize == 50)
-        { sizeValue.setText("Any group size"); }
-        else
-        { sizeValue.setText(minSize + " - " + maxSize + " members"); }
+         && maxSize == 50)  { sizeValue.setText("Any group size"); }
+        else    { sizeValue.setText(minSize + " - " + maxSize + " members"); }
     }
 
 }

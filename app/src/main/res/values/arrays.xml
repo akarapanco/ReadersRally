@@ -13,12 +13,13 @@
         <item>Fiction</item>
         <item>History</item>
         <item>Religion</item>
+        <item>Poetry</item>
     </string-array>
 
     <string-array name="communication_options">
         <item>Any</item>
         <item>Online</item>
-        <item>In-Person</item>
+        <item>In Person</item>
     </string-array>
 
     <array name="default_book_range">

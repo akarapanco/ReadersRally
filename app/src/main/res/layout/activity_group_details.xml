@@ -13,6 +13,19 @@
         android:padding="24dp">
 
 
+        <!-- Settings Button -->
+        <ImageButton
+            android:id="@+id/settingsButton"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_gravity="end"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:src="@drawable/ic_settings"
+            android:background="@android:color/transparent"
+            android:contentDescription="Group Settings"
+            android:visibility="gone" />
+
         <!-- Group Name -->
         <TextView
             android:id="@+id/groupDetailsName"
@@ -24,7 +37,7 @@
             android:textSize="28sp"
             android:textStyle="bold" />
 
-        <!-- Group Biography -->
+        <!-- Group Bio -->
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -100,6 +113,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="36dp"
             android:text="Request to Join" />
+
 
     </LinearLayout>
 </ScrollView>

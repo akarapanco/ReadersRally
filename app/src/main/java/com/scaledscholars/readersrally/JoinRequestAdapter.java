@@ -35,7 +35,7 @@ public class JoinRequestAdapter extends RecyclerView.Adapter<JoinRequestAdapter.
     public void onBindViewHolder(@NonNull RequestViewHolder holder, int position) {
         JoinRequest request = requestList.get(position);
         holder.groupNameText.setText(request.groupName);
-        holder.userText.setText(request.userEmail);
+        holder.userText.setText(request.username);
         holder.messageText.setText(request.message);
         holder.approveButton.setOnClickListener(v -> listener.onApprove(request));
         holder.denyButton.setOnClickListener(v -> listener.onDeny(request));

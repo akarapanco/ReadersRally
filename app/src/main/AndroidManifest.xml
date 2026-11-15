@@ -30,6 +30,10 @@
             android:name=".GroupDetailsActivity"
             android:exported="false" />
         <activity
+            android:name=".GroupSettingsActivity" />
+        <activity
+            android:name=".GroupRosterActivity" />
+        <activity
             android:name=".MyGroupsActivity"
             android:exported="false" />
         <activity
