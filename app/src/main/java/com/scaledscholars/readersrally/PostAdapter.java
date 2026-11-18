@@ -85,7 +85,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
         box.addView(contentInput);
         box.addView(repliesSwitch);
 
-        new AlertDialog.Builder(ctx)
+        new AlertDialog.Builder(ctx, R.style.FilterDialogTheme)
             .setTitle("Edit post")
             .setView(box)
             .setPositiveButton("Save", (d, w) -> {

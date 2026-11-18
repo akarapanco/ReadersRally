@@ -125,7 +125,7 @@ public class PostDetailActivity extends AppCompatActivity {
     private void editReply(Reply reply) {
         EditText input = new EditText(this);
         input.setText(reply.content);
-        new AlertDialog.Builder(this)
+        new AlertDialog.Builder(this, R.style.FilterDialogTheme)
             .setTitle("Edit reply")
             .setView(input)
             .setPositiveButton("Save", (d, w) -> {
