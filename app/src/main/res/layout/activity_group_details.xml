@@ -8,7 +8,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/light_teal"
+        android:background="@color/dark_teal"
         android:orientation="vertical"
         android:padding="24dp">
 
@@ -41,9 +41,9 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:text="Group Name"
-            android:textColor="#212121"
-            android:textSize="28sp"
-            android:textStyle="bold" />
+            android:textColor="@color/dark_beige"
+            android:textSize="32sp"
+            android:textStyle="bold|italic" />
 
         <!-- Group Bio -->
         <TextView
@@ -51,8 +51,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
             android:text="About This Group"
-            android:textColor="#212121"
-            android:textSize="20sp"
+            android:textColor="@color/dark_violet"
+            android:textSize="26sp"
             android:textStyle="bold" />
 
         <TextView
@@ -61,8 +61,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:text="Group biography will appear here."
-            android:textColor="#555555"
-            android:textSize="16sp" />
+            android:textColor="@color/beige"
+            android:textSize="20sp" />
 
         <!-- Group Information -->
         <TextView
@@ -70,8 +70,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="28dp"
             android:text="Group Information"
-            android:textColor="#212121"
-            android:textSize="20sp"
+            android:textColor="@color/dark_violet"
+            android:textSize="26sp"
             android:textStyle="bold" />
 
         <TextView
@@ -80,7 +80,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
             android:text="Genre:"
-            android:textSize="16sp" />
+            android:textSize="20sp" />
 
         <TextView
             android:id="@+id/groupDetailsBook"
@@ -88,7 +88,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
             android:text="Currently Reading:"
-            android:textSize="16sp" />
+            android:textSize="20sp" />
 
         <TextView
             android:id="@+id/groupDetailsBookLength"
@@ -96,7 +96,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
             android:text="Book Length:"
-            android:textSize="16sp" />
+            android:textSize="20sp" />
 
         <TextView
             android:id="@+id/groupDetailsCommunication"
@@ -104,7 +104,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
             android:text="Communication Method:"
-            android:textSize="16sp" />
+            android:textSize="20sp" />
 
         <TextView
             android:id="@+id/groupDetailsSize"
@@ -112,7 +112,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
             android:text="Members:"
-            android:textSize="16sp" />
+            android:textSize="20sp" />
 
         <!-- Join Request Button -->
         <Button

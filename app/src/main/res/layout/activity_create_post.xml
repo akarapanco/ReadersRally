@@ -26,7 +26,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:orientation="vertical"
-        android:background="@drawable/card_background"
+        android:background="@color/light_teal"
         android:padding="16dp">
 
         <EditText
@@ -34,8 +34,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Post title"
-            android:textColor="#000000"
-            android:textColorHint="#888888" />
+            android:textColor="@color/dark_violet"
+            android:textColorHint="#444444" />
 
         <EditText
             android:id="@+id/bookEditText"
@@ -43,8 +43,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:hint="What book are you reading?"
-            android:textColor="#000000"
-            android:textColorHint="#888888" />
+            android:textColor="@color/dark_violet"
+            android:textColorHint="#444444" />
 
         <EditText
             android:id="@+id/nameEditText"
@@ -52,8 +52,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:hint="Your name"
-            android:textColor="#000000"
-            android:textColorHint="#888888" />
+            android:textColor="@color/dark_violet"
+            android:textColorHint="#444444" />
 
         <EditText
             android:id="@+id/contentEditText"
@@ -63,8 +63,8 @@
             android:gravity="top"
             android:hint="What do you want to discuss?"
             android:inputType="textMultiLine"
-            android:textColor="#000000"
-            android:textColorHint="#888888" />
+            android:textColor="@color/dark_violet"
+            android:textColorHint="#444444" />
 
         <Switch
             android:id="@+id/repliesSwitch"
@@ -73,7 +73,7 @@
             android:layout_marginTop="8dp"
             android:checked="true"
             android:text="Allow replies  "
-            android:textColor="#000000" />
+            android:textColor="@color/dark_violet" />
     </LinearLayout>
 
     <Button

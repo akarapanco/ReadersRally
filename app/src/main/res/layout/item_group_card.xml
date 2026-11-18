@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginBottom="8dp"
-    android:background="@color/white"
+    android:background="@color/light_teal"
     android:orientation="vertical"
     android:padding="16dp">
 
@@ -11,16 +11,16 @@
         android:id="@+id/groupNameText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="#000000"
-        android:textSize="18sp"
+        android:textColor="@color/beige"
+        android:textSize="22sp"
         android:textStyle="bold" />
 
     <TextView
         android:id="@+id/groupBookText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="#000000"
-        android:textSize="14sp" />
+        android:textColor="@color/beige"
+        android:textSize="18sp" />
 
     <LinearLayout
         android:layout_width="wrap_content"

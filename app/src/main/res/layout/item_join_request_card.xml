@@ -5,30 +5,32 @@
     android:layout_height="wrap_content"
     android:orientation="vertical"
     android:padding="16dp"
+    android:backgroundTint="@color/light_teal"
     android:background="@android:drawable/dialog_holo_light_frame"
     android:layout_marginBottom="8dp">
 
     <TextView
-        android:textColor="#000000"
+        android:textColor="@color/beige"
         android:id="@+id/requestGroupNameText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="18sp"
+        android:textSize="22sp"
         android:textStyle="bold" />
 
     <TextView
-        android:textColor="#000000"
+        android:textColor="@color/beige"
         android:id="@+id/requestUserText"
+        android:textStyle="italic"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="14sp" />
+        android:textSize="18sp" />
 
     <TextView
-        android:textColor="#000000"
+        android:textColor="@color/beige"
         android:id="@+id/requestMessageText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="14sp"
+        android:textSize="18sp"
         android:layout_marginTop="4dp" />
 
     <LinearLayout
@@ -38,7 +40,6 @@
         android:layout_marginTop="8dp">
 
         <Button
-        android:textColor="#FFFFFF"
             android:id="@+id/approveButton"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -46,7 +47,6 @@
             android:text="Approve" />
 
         <Button
-        android:textColor="#FFFFFF"
             android:id="@+id/denyButton"
             android:layout_width="0dp"
             android:layout_height="wrap_content"

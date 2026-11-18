@@ -262,7 +262,7 @@ public class BrowseGroupsActivity extends AppCompatActivity
 
         sizeSlider.addOnChangeListener((slider, value, fromUser) -> updateRangeLabels(bookSlider, sizeSlider, bookValue, sizeValue));
 
-        AlertDialog dialog = new AlertDialog.Builder(this).setTitle("Filter Groups").setView(dialogView)
+        AlertDialog dialog = new AlertDialog.Builder(this, R.style.FilterDialogTheme).setTitle("Filter Groups").setView(dialogView)
 
                 .setPositiveButton("Apply Filters", (d, which) ->
                 {

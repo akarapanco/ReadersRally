@@ -28,7 +28,17 @@
         <item name="layout_constraintTop_toTopOf">parent</item>
         <item name="layout_constraintStart_toStartOf">parent</item>
         <item name="layout_constraintEnd_toEndOf">parent</item>
+    </style>
 
+    <style name="FilterDialogTitle" parent="RtlOverlay.DialogWindowTitle.AppCompat">
+        <item name="android:textSize">28sp</item>
+    </style>
+
+    <style name="FilterDialogTheme" parent="Theme.AppCompat.Dialog.Alert">
+        <item name="android:windowBackground">@color/dark_teal</item>
+        <item name="android:textColorPrimary">@color/beige</item>
+        <item name="colorAccent">@color/dark_violet</item>
+        <item name="android:windowTitleStyle">@style/FilterDialogTitle</item>
     </style>
 
     <style name="Theme.ReadersRally" parent="Base.Theme.ReadersRally" />
