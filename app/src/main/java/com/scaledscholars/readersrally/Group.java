@@ -9,6 +9,7 @@ public class Group
     private String communicationMethod;
     private Integer bookLength;
     private Integer groupSize;
+    private Integer memberCount;
 
     public Group() {}
 
@@ -53,4 +54,8 @@ public class Group
 
     //Display group size (filter)
     public Integer getGroupSize()   { return groupSize; }
+
+    public Integer getMemberCount() { return memberCount; }
+
+    public void setMemberCount(Integer memberCount) { this.memberCount = memberCount; }
 }

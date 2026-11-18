@@ -54,7 +54,8 @@ public class BrowseGroupsAdapter extends RecyclerView.Adapter<BrowseGroupsAdapte
 
         holder.groupGenreText.setText(context.getString(R.string.group_genre, genre));
 
-        if (size != null) { holder.groupSizeText.setText(context.getString(R.string.group_members, size));}
+        if (size != null && group.getMemberCount() != null) { holder.groupSizeText.setText(context.getString(R.string.group_members_of, group.getMemberCount(), size)); }
+        else if (size != null) { holder.groupSizeText.setText(R.string.group_members_loading); }
 
         else { holder.groupSizeText.setText(R.string.group_members_unknown); }
 

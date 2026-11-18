@@ -129,6 +129,11 @@ public class GroupDetailsActivity extends AppCompatActivity
 
         if (members != null && maxMembers != null)  { groupSize.setText("Members: " + members + "/" + maxMembers); }
         else    { groupSize.setText("Members: Not specified"); }
+
+        com.google.firebase.firestore.FirebaseFirestore.getInstance().collection("users")
+                .whereArrayContains("enrolledGroupIds", doc.getId()).get()
+                .addOnSuccessListener(memberSnapshot ->
+                { if (maxMembers != null) { groupSize.setText("Members: " + memberSnapshot.size() + "/" + maxMembers); } });
     }
 
     private void checkGroupMembership(ImageButton settingsButton)

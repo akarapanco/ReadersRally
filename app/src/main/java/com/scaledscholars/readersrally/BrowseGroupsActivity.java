@@ -124,9 +124,34 @@ public class BrowseGroupsActivity extends AppCompatActivity
                     }
 
                     updateDisplayedGroups();
+                    loadMemberCounts();
                 })
                 .addOnFailureListener(e ->
                 { Toast.makeText(this, "Unable to load groups: " + e.getMessage(), Toast.LENGTH_LONG).show(); });
+    }
+
+
+    @SuppressWarnings("unchecked")
+    private void loadMemberCounts()
+    {
+        db.collection("users").get().addOnSuccessListener(userSnapshot ->
+        {
+            java.util.Map<String, Integer> counts = new java.util.HashMap<>();
+
+            for (DocumentSnapshot userDoc : userSnapshot.getDocuments())
+            {
+                List<String> enrolled = (List<String>) userDoc.get("enrolledGroupIds");
+                if (enrolled == null)   { continue; }
+
+                for (String groupId : enrolled)
+                { counts.put(groupId, counts.containsKey(groupId) ? counts.get(groupId) + 1 : 1); }
+            }
+
+            for (Group g : groups)
+            { g.setMemberCount(counts.containsKey(g.getId()) ? counts.get(g.getId()) : 0); }
+
+            updateDisplayedGroups();
+        });
     }
 
 
